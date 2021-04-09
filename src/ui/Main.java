@@ -11,18 +11,18 @@ import model.SuperMarket;
 
 public class Main {
 	
-	public Main() {
-		
-	}
-
 	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	
 	private SuperMarket market;
 	
+	public Main() {
+		
+		market = new SuperMarket();
+	}
 	
 	public static void main(String[] args) throws IOException {
 		
-	int choose = -1;
+	int choose = 3;
 		
 	Main app = new Main();
 	
@@ -37,16 +37,14 @@ public class Main {
 		
 		int answer = 0;
 		
-		do {
 		System.out.println("Choose an Option: " + "\n (0) Let Someone enter " + "\n (1) See How many have enter " + "\n (2)End the Program ");
 		
-		answer = br.read();
-		}while((answer>=0)&&(answer<3));
+		answer = (Integer.parseInt(br.readLine()));
 		return answer;
 		
 	}
 	public void executeOperation(int choose) throws NumberFormatException, IOException {
-		
+		System.out.println("enters");
 		switch(choose) {
 		
 		case 0: letJoin();
@@ -59,7 +57,7 @@ public class Main {
 		}
 	}
 	public void letJoin() throws NumberFormatException, IOException{
-		
+		System.out.println("enters 2");
 		String document = "";
 		
 		String id = "";
@@ -98,16 +96,23 @@ public class Main {
 		}
 		day = LocalDate.now().getDayOfMonth();
 		try {
-		market.letJoin(document, id,day,penultime);
+		boolean joined	= market.letJoin(document, id,day,penultime);
+		if(joined==true) {
+		System.out.println("The person went inside");	
+		}
 		}catch(MinorAgeException mae){
-			
+			mae.printStackTrace();
+			System.out.println("The minor ages cant go inside ");
 			
 		}catch(NotAllowedDayException nade){
-			
+			nade.printStackTrace();
+	
 		}
 		
 	}
 	public void seeTries() {
 		
+		int tries = market.getTries();
+		System.out.println("The amount of people that have try to enter is: " + tries);
 	}
 }
