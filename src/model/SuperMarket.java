@@ -16,7 +16,7 @@ public class SuperMarket {
 		customers = new ArrayList<Person>();
 	}
 	public boolean letJoin(String document,String id, int day, int penultime)throws MinorAgeException, NotAllowedDayException {
-		boolean joined;
+		boolean joined = false;
 		tries+=1;
 		if(document.equals("TI")) {
 		throw new MinorAgeException(id);
